@@ -15,6 +15,7 @@
   --pink-2: #ef4b9b;
   --purple: #8f3df5;
   --orange: #ff6942;
+  --brand-gradient: linear-gradient(90deg, #ff6942 0%, #d91f7f 50%, #8f3df5 100%);
   --line: rgba(255, 255, 255, 0.12);
 }
 
@@ -91,12 +92,15 @@ a {
   place-items: center;
   border-radius: 8px;
   color: #fff;
-  background: linear-gradient(145deg, #a83be2, #dc3191);
+  background: var(--brand-gradient);
   font-size: 14px;
 }
 
 .brand-name span {
-  color: #df167a;
+  background: var(--brand-gradient);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
 }
 
 .nav-content,
@@ -195,7 +199,7 @@ a {
 
 .hero-copy h1 span {
   display: block;
-  background: linear-gradient(90deg, #ff552d, #d91d8e, #9b2bc5);
+  background: var(--brand-gradient);
   background-clip: text;
   -webkit-background-clip: text;
   color: transparent;
@@ -226,7 +230,7 @@ a {
 
 .primary-button {
   color: #fff;
-  background: linear-gradient(90deg, #ff6a1a, #e62b9a);
+  background: var(--brand-gradient);
 }
 
 .secondary-button {
@@ -263,7 +267,7 @@ a {
 }
 
 .technologies-intro h2 span {
-  background: linear-gradient(90deg, #ef4b9b, #a22fc5);
+  background: var(--brand-gradient);
   background-clip: text;
   -webkit-background-clip: text;
   color: transparent;
@@ -432,6 +436,35 @@ a {
   font-size: 0.8rem;
   font-weight: 700;
   color: #f59e0b;
+}
+
+.loading-state {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  min-height: 220px;
+  border: 1px solid rgba(148, 163, 184, 0.5);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.7);
+  color: #334155;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.loading-spinner {
+  width: 18px;
+  height: 18px;
+  border: 3px solid rgba(15, 23, 42, 0.15);
+  border-top-color: #d91f7f;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .stack-button {

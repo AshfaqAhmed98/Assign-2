@@ -1,4 +1,6 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { toast, ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 import bannerStack from '../../assets/banner-stack.png'
 import technologiesData from './data/technologies.json'
 import './App.css'
@@ -124,23 +126,46 @@ const technologies = technologiesData
 function App() {
   const [menuOpen, setMenuOpen] = useState(false)
   const [stack, setStack] = useState([])
+  const [isLoading, setIsLoading] = useState(true)
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false)
+    }, 500)
+
+    return () => clearTimeout(timer)
+  }, [])
 
   const addToStack = (technology) => {
     const exists = stack.some((item) => item.id === technology.id)
 
     if (exists) {
-      window.alert('This technology is already in your stack.')
+      toast.warn(`${technology.name} is already in your stack.`)
       return
     }
 
     setStack((current) => [...current, technology])
+    toast.success(`${technology.name} added to your stack.`)
   }
 
   const removeFromStack = (technologyId) => {
+    const item = stack.find((tech) => tech.id === technologyId)
     setStack((current) => current.filter((item) => item.id !== technologyId))
+
+    if (item) {
+      toast.info(`${item.name} removed from your stack.`)
+    }
   }
 
-  const removeAll = () => setStack([])
+  const removeAll = () => {
+    if (stack.length === 0) {
+      toast.info('Your stack is already empty.')
+      return
+    }
+
+    setStack([])
+    toast.info('All technologies removed from your stack.')
+  }
 
   return (
     <>
@@ -210,40 +235,47 @@ function App() {
 
         <section className="technology-layout" aria-label="Technology list and stack sidebar">
           <div className="technology-panel">
-            <div className="technology-grid">
-              {technologies.map((technology) => {
-                const isSelected = stack.some((item) => item.id === technology.id)
+            {isLoading ? (
+              <div className="loading-state" aria-live="polite">
+                <div className="loading-spinner" aria-hidden="true" />
+                <p>Loading technologies...</p>
+              </div>
+            ) : (
+              <div className="technology-grid">
+                {technologies.map((technology) => {
+                  const isSelected = stack.some((item) => item.id === technology.id)
 
-                return (
-                  <article key={technology.id} className="tech-card">
-                    <div className="tech-card-top">
-                      <span className={`tech-icon ${technology.accent}`}>
-                        <TechIcon type={technology.icon} />
-                      </span>
-                      <span className="tech-badge" data-category={technology.category}>{technology.badge}</span>
-                    </div>
+                  return (
+                    <article key={technology.id} className="tech-card">
+                      <div className="tech-card-top">
+                        <span className={`tech-icon ${technology.accent}`}>
+                          <TechIcon type={technology.icon} />
+                        </span>
+                        <span className="tech-badge" data-category={technology.category}>{technology.badge}</span>
+                      </div>
 
-                    <h3>{technology.name}</h3>
-                    <p className="tech-description">{technology.description}</p>
+                      <h3>{technology.name}</h3>
+                      <p className="tech-description">{technology.description}</p>
 
-                    <div className="tech-meta">
-                      <span className="meta-tag">{technology.category}</span>
-                      <span className="meta-tag">{technology.difficulty}</span>
-                      <span className="rating">{technology.rating.toFixed(1)}</span>
-                    </div>
+                      <div className="tech-meta">
+                        <span className="meta-tag">{technology.category}</span>
+                        <span className="meta-tag">{technology.difficulty}</span>
+                        <span className="rating">{technology.rating.toFixed(1)}</span>
+                      </div>
 
-                    <button
-                      type="button"
-                      className="stack-button"
-                      onClick={() => addToStack(technology)}
-                      disabled={isSelected}
-                    >
-                      {isSelected ? 'Added to Stack' : 'Add to Stack'}
-                    </button>
-                  </article>
-                )
-              })}
-            </div>
+                      <button
+                        type="button"
+                        className="stack-button"
+                        onClick={() => addToStack(technology)}
+                        disabled={isSelected}
+                      >
+                        {isSelected ? 'Added to Stack' : 'Add to Stack'}
+                      </button>
+                    </article>
+                  )
+                })}
+              </div>
+            )}
           </div>
 
           <aside className="stack-sidebar" aria-label="Selected stack">
@@ -286,6 +318,17 @@ function App() {
         </section>
 
       </main>
+
+      <ToastContainer
+        position="top-right"
+        autoClose={2200}
+        hideProgressBar={false}
+        newestOnTop
+        closeOnClick
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
 
       <footer className="site-footer">
         <div className="footer-main">
