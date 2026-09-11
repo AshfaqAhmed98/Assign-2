@@ -19,30 +19,30 @@ DevStack is a small React app that helps users choose the technologies they want
 
 ## React Questions and Answers
 
-### i. What is JSX, and why is it used in React?
+### 1. What is JSX, and why is it used in React?
 
 JSX is like writing HTML inside JavaScript. It makes creating the UI easier in React.
 
-### ii. What is the difference between props and state?
+### 2. What is the difference between props and state?
 
 Props are used to pass data from one component to another. State is used to store data inside a component.
 
-### iii. What does the `useState` hook do?
+### 3. What does the `useState` hook do, and where did you use it in this project?
 
-`useState` is used to store and change data in a React component.
+`useState` stores and updates changing data. I used it for the selected stack, the mobile menu, and the loading state.
 
-### iv. What does the `useEffect` hook do, and why did you use it to load the JSON data?
+### 4. What does the `useEffect` hook do, and why did you need it to load the JSON data?
 
-`useEffect` runs some code after the component loads. I used it to fetch the JSON data.
+`useEffect` runs code after the component renders. The JSON is imported directly, and I used `useEffect` to control the short loading state before showing the cards.
 
-### v. Why does every item in a `.map()` list need a unique `key` prop?
+### 5. Why does every item in a `.map()` list need a unique `key` prop?
 
 The `key` helps React identify each item in the list.
 
-### vi. What is conditional rendering?
+### 6. What is conditional rendering? Show one place you used it.
 
 It means showing something only when a condition is true. For example, I showed an empty stack message when there were no items.
 
-### vii. How do you pass data from a parent to a child component, and how does a child send something back to the parent?
+### 7. How do you pass data from a parent to a child component, and how does a child send something back to the parent?
 
 The parent sends data using props. The child can send data back by calling a function passed from the parent.

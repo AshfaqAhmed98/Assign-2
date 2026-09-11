@@ -931,6 +931,10 @@ a {
     padding-right: 24px;
   }
 
+  .technology-layout {
+    grid-template-columns: 1fr;
+  }
+
   .technology-grid {
     grid-template-columns: 1fr;
   }
