@@ -1,6 +1,125 @@
 @import "tailwindcss";
 @plugin "daisyui";
 
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: #fff;
+  border-bottom: 1px solid #edf0f4;
+}
+
+.navbar {
+  position: relative;
+  min-height: 92px;
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 52px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+  font-family: var(--sans);
+}
+
+.brand,
+.nav-links a,
+.auth-actions a {
+  text-decoration: none;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  color: #17243a;
+  font-size: 21px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.brand-mark {
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  border-radius: 8px;
+  color: #fff;
+  background: linear-gradient(145deg, #a83be2, #dc3191);
+  font-size: 14px;
+}
+
+.brand-name span {
+  color: #df167a;
+}
+
+.nav-content,
+.nav-links,
+.auth-actions {
+  display: flex;
+  align-items: center;
+}
+
+.nav-content {
+  flex: 1;
+  gap: 54px;
+  justify-content: flex-end;
+}
+
+.nav-links {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  gap: 34px;
+}
+
+.nav-links a,
+.auth-actions a {
+  color: #38465d;
+  font-size: 16px;
+  transition: color 0.2s ease;
+}
+
+.nav-links a:hover,
+.nav-links a.active,
+.auth-actions a:hover {
+  color: #df167a;
+}
+
+.auth-actions {
+  gap: 24px;
+}
+
+.auth-actions .sign-up {
+  padding: 12px 23px;
+  border-radius: 999px;
+  color: #fff;
+  background: #df167a;
+}
+
+.auth-actions .sign-up:hover {
+  color: #fff;
+  background: #bd1268;
+}
+
+.menu-toggle {
+  display: none;
+  width: 38px;
+  height: 38px;
+  padding: 7px;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.menu-toggle span {
+  display: block;
+  height: 2px;
+  margin: 5px 0;
+  background: #5d5d64;
+}
+
 .counter {
   font-size: 16px;
   padding: 5px 10px;
@@ -182,5 +301,66 @@
   &::after {
     right: 0;
     border-right-color: var(--border);
+  }
+}
+
+@media (max-width: 800px) {
+  .navbar {
+    min-height: 64px;
+    padding: 0 20px;
+  }
+
+  .brand {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    gap: 6px;
+    font-size: 14px;
+  }
+
+  .brand-mark {
+    width: 27px;
+    height: 27px;
+    border-radius: 6px;
+    font-size: 10px;
+  }
+
+  .menu-toggle {
+    display: block;
+  }
+
+  .nav-content {
+    position: absolute;
+    top: 64px;
+    left: 0;
+    right: 0;
+    display: none;
+    padding: 18px 20px 22px;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 18px;
+    background: #fff;
+    border-bottom: 1px solid #edf0f4;
+    box-shadow: 0 12px 24px rgba(20, 27, 45, 0.08);
+  }
+
+  .nav-content.is-open {
+    display: flex;
+  }
+
+  .nav-links,
+  .auth-actions {
+    justify-content: center;
+  }
+
+  .nav-links {
+    position: static;
+    transform: none;
+    flex-wrap: wrap;
+    gap: 16px 24px;
+  }
+
+  .auth-actions {
+    gap: 18px;
   }
 }
