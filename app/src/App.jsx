@@ -286,6 +286,63 @@ function App() {
         </section>
 
       </main>
+
+      <footer className="site-footer">
+        <div className="footer-main">
+          <div className="footer-brand">
+            <div className="footer-brand-row">
+              <span className="brand-mark footer-mark">DS</span>
+              <span className="brand-name">
+                Dev<span>Stack</span>
+              </span>
+            </div>
+            <p>
+              Curated tools, technologies, and resources for developers building
+              modern software.
+            </p>
+            <div className="social-links">
+              <a href="#github">GitHub</a>
+              <a href="#twitter">Twitter</a>
+              <a href="#linkedin">LinkedIn</a>
+            </div>
+          </div>
+
+          <div className="footer-column">
+            <h4>PRODUCT</h4>
+            <ul>
+              <li><a href="#home">Home</a></li>
+              <li><a href="#technologies">Technologies</a></li>
+              <li><a href="#projects">Projects</a></li>
+            </ul>
+          </div>
+
+          <div className="footer-column">
+            <h4>COMPANY</h4>
+            <ul>
+              <li><a href="#about">About</a></li>
+              <li><a href="#contact">Contact</a></li>
+              <li><a href="#careers">Careers</a></li>
+            </ul>
+          </div>
+
+          <div className="footer-column">
+            <h4>LEGAL</h4>
+            <ul>
+              <li><a href="#privacy">Privacy Policy</a></li>
+              <li><a href="#terms">Terms of Service</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div className="footer-bottom">
+          <span>© 2026 Dev Stack. All rights reserved.</span>
+          <div className="bottom-links">
+            <a href="#privacy">Privacy</a>
+            <a href="#terms">Terms</a>
+          </div>
+        </div>
+
+      </footer>
     </>
   )
 }
