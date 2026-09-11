@@ -1,0 +1,13 @@
+{
+  "scripts": {
+    "dev": "npm --prefix app run dev"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.5.6",
+    "postcss": "^8.5.28",
+    "tailwindcss": "^3.4.19"
+  },
+  "dependencies": {
+    "daisyui": "^5.7.36"
+  }
+}
