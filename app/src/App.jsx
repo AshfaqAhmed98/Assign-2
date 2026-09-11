@@ -123,6 +123,24 @@ const technologies = technologiesData
 
 function App() {
   const [menuOpen, setMenuOpen] = useState(false)
+  const [stack, setStack] = useState([])
+
+  const addToStack = (technology) => {
+    const exists = stack.some((item) => item.id === technology.id)
+
+    if (exists) {
+      window.alert('This technology is already in your stack.')
+      return
+    }
+
+    setStack((current) => [...current, technology])
+  }
+
+  const removeFromStack = (technologyId) => {
+    setStack((current) => current.filter((item) => item.id !== technologyId))
+  }
+
+  const removeAll = () => setStack([])
 
   return (
     <>
@@ -190,31 +208,83 @@ function App() {
           <p>Pick one technology per category to build your ideal stack.</p>
         </section>
 
-        <section className="technology-panel" aria-label="Technology list">
-          <div className="technology-grid">
-            {technologies.map((technology) => (
-              <article key={technology.id} className="tech-card">
-                <div className="tech-card-top">
-                  <span className={`tech-icon ${technology.accent}`}>
-                    <TechIcon type={technology.icon} />
-                  </span>
-                  <span className="tech-badge" data-category={technology.category}>{technology.badge}</span>
-                </div>
+        <section className="technology-layout" aria-label="Technology list and stack sidebar">
+          <div className="technology-panel">
+            <div className="technology-grid">
+              {technologies.map((technology) => {
+                const isSelected = stack.some((item) => item.id === technology.id)
 
-                <h3>{technology.name}</h3>
-                <p className="tech-description">{technology.description}</p>
+                return (
+                  <article key={technology.id} className="tech-card">
+                    <div className="tech-card-top">
+                      <span className={`tech-icon ${technology.accent}`}>
+                        <TechIcon type={technology.icon} />
+                      </span>
+                      <span className="tech-badge" data-category={technology.category}>{technology.badge}</span>
+                    </div>
 
-                <div className="tech-meta">
-                  <span className="meta-tag">{technology.category}</span>
-                  <span className="meta-tag">{technology.difficulty}</span>
-                  <span className="rating">{technology.rating.toFixed(1)}</span>
-                </div>
+                    <h3>{technology.name}</h3>
+                    <p className="tech-description">{technology.description}</p>
 
-                <button type="button" className="stack-button">Add to Stack</button>
-              </article>
-            ))}
+                    <div className="tech-meta">
+                      <span className="meta-tag">{technology.category}</span>
+                      <span className="meta-tag">{technology.difficulty}</span>
+                      <span className="rating">{technology.rating.toFixed(1)}</span>
+                    </div>
+
+                    <button
+                      type="button"
+                      className="stack-button"
+                      onClick={() => addToStack(technology)}
+                      disabled={isSelected}
+                    >
+                      {isSelected ? 'Added to Stack' : 'Add to Stack'}
+                    </button>
+                  </article>
+                )
+              })}
+            </div>
           </div>
+
+          <aside className="stack-sidebar" aria-label="Selected stack">
+            <h3>Your Stack</h3>
+            <p>{stack.length} Technology Selected</p>
+
+            {stack.length === 0 ? (
+              <div className="stack-empty">
+                <h4>Your Stack</h4>
+                <p>No technologies selected yet.</p>
+                <div className="empty-placeholder">Your stack is empty.</div>
+              </div>
+            ) : (
+              <div className="stack-selected">
+                {stack.map((item) => (
+                  <div key={item.id} className="stack-item">
+                    <div className="stack-item-main">
+                      <span className={`tech-icon small ${item.accent}`}>
+                        <TechIcon type={item.icon} />
+                      </span>
+                      <div className="stack-item-text">
+                        <span>{item.name}</span>
+                        <small>{item.category}</small>
+                      </div>
+                    </div>
+                    <button
+                      type="button"
+                      className="remove-item"
+                      onClick={() => removeFromStack(item.id)}
+                      aria-label={`Remove ${item.name}`}
+                    >
+                      ×
+                    </button>
+                  </div>
+                ))}
+                <button type="button" className="remove-all" onClick={removeAll}>Remove All</button>
+              </div>
+            )}
+          </aside>
         </section>
+
       </main>
     </>
   )
