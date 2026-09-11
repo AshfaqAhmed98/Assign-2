@@ -1,11 +1,10 @@
 import { useState } from 'react'
-import heroImg from './assets/hero.png'
+import bannerStack from '../../assets/banner-stack.png'
 import reactLogo from './assets/react.svg'
 import viteLogo from './assets/vite.svg'
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
   const [menuOpen, setMenuOpen] = useState(false)
 
   return (
@@ -47,28 +46,31 @@ function App() {
         </nav>
       </header>
 
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
+      <section className="hero-banner" id="home">
+        <div className="hero-copy">
+          <h1>
+            Build Your Ideal
+            <span>Development Stack</span>
+          </h1>
           <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
+            Explore frontend, backend, database, and tooling options, compare
+            them side by side, and put together the stack that fits your next
+            project.
           </p>
+          <div className="hero-actions">
+            <a className="primary-button" href="#technologies">Explore Technologies</a>
+            <a className="secondary-button" href="#about">Learn More</a>
+          </div>
         </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
+        <div className="hero-visual">
+          <img src={bannerStack} alt="Technology stack illustration" />
+        </div>
       </section>
 
-      <div className="ticks"></div>
+      <section className="technologies-intro" id="technologies">
+        <h2>Explore the <span>Technologies</span></h2>
+        <p>Pick one technology per category to build your ideal stack.</p>
+      </section>
 
       <section id="next-steps">
         <div id="docs">
