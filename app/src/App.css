@@ -319,36 +319,57 @@ a {
 }
 
 .tech-icon {
-  width: 34px;
-  height: 34px;
+  width: 38px;
+  height: 38px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border-radius: 9px;
+  border-radius: 11px;
   color: #fff;
   background: linear-gradient(135deg, #1f2937, #0f172a);
   overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 18px rgba(15, 23, 42, 0.14), inset 0 1px 0 rgba(255, 255, 255, 0.16);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.tech-icon svg {
+.tech-icon:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 22px rgba(15, 23, 42, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.18);
+}
+
+.tech-icon svg,
+.tech-icon-image {
   width: 22px;
   height: 22px;
   display: block;
   color: currentColor;
 }
 
-.tech-icon.react { background: linear-gradient(135deg, #61dafb, #2ec4ff); color: #0f172a; }
+.tech-icon-image {
+  object-fit: contain;
+  filter: drop-shadow(0 1px 1px rgba(15, 23, 42, 0.28)) contrast(1.08) saturate(1.15);
+}
+
+.tech-icon.react {
+  background: linear-gradient(135deg, #0f172a, #1d4ed8);
+}
+
+.tech-icon.react .tech-icon-image {
+  filter: drop-shadow(0 0 2px rgba(97, 218, 251, 0.9)) brightness(1.15) saturate(1.25) contrast(1.08);
+}
+
 .tech-icon.vue { background: linear-gradient(135deg, #42b883, #2f8555); }
-.tech-icon.svelte { background: linear-gradient(135deg, #ff3e00, #c92b12); }
+.tech-icon.svelte { background: linear-gradient(135deg, #ff5c2c, #c92b12); }
 .tech-icon.next { background: linear-gradient(135deg, #111827, #374151); }
 .tech-icon.node { background: linear-gradient(135deg, #6cc24a, #4d8a35); }
 .tech-icon.postgres { background: linear-gradient(135deg, #336791, #1e4d74); }
-.tech-icon.redis { background: linear-gradient(135deg, #ff4d4d, #dc2626); }
-.tech-icon.javascript { background: linear-gradient(135deg, #f4d544, #eab308); color: #0f172a; }
-.tech-icon.typescript { background: linear-gradient(135deg, #3178c6, #235ea6); }
-.tech-icon.java { background: linear-gradient(135deg, #e76f51, #d9534f); }
-.tech-icon.tailwind { background: linear-gradient(135deg, #14b8a6, #0f766e); }
-.tech-icon.docker { background: linear-gradient(135deg, #38bdf8, #0ea5e9); }
+.tech-icon.redis { background: linear-gradient(135deg, #ff5b5b, #dc2626); }
+.tech-icon.javascript { background: linear-gradient(135deg, #f9de59, #f0b90b); color: #0f172a; }
+.tech-icon.typescript { background: linear-gradient(135deg, #4a9bff, #235ea6); }
+.tech-icon.java { background: linear-gradient(135deg, #ff8c6b, #d9534f); }
+.tech-icon.tailwind { background: linear-gradient(135deg, #19d0b4, #0f766e); }
+.tech-icon.docker { background: linear-gradient(135deg, #4ec5ff, #0ea5e9); }
 
 .tech-badge {
   display: inline-flex;

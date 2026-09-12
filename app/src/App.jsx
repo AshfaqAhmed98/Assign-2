@@ -2,123 +2,56 @@ import { useEffect, useState } from 'react'
 import { toast, ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import bannerStack from '../../assets/banner-stack.png'
+import ReactIcon from './Icons/React.svg'
+import VueIcon from './Icons/Vue.js.svg'
+import SvelteIcon from './Icons/Svelte.svg'
+import NextIcon from './Icons/Next.js.svg'
+import NodeIcon from './Icons/Node.js.svg'
+import PostgresIcon from './Icons/PostgresSQL.svg'
+import RedisIcon from './Icons/Redis.svg'
+import JavaScriptIcon from './Icons/JavaScript.svg'
+import TypeScriptIcon from './Icons/TypeScript.svg'
+import JavaIcon from './Icons/Java.svg'
+import TailwindIcon from './Icons/Tailwind CSS.svg'
+import DockerIcon from './Icons/Docker.svg'
 import technologiesData from './data/technologies.json'
 import './App.css'
 
+const iconMap = {
+  react: ReactIcon,
+  vue: VueIcon,
+  svelte: SvelteIcon,
+  next: NextIcon,
+  node: NodeIcon,
+  postgres: PostgresIcon,
+  redis: RedisIcon,
+  javascript: JavaScriptIcon,
+  typescript: TypeScriptIcon,
+  java: JavaIcon,
+  tailwind: TailwindIcon,
+  docker: DockerIcon,
+}
+
 function TechIcon({ type }) {
-  const commonProps = {
-    viewBox: '0 0 64 64',
-    fill: 'none',
-    stroke: 'currentColor',
-    strokeWidth: 2.5,
-    strokeLinecap: 'round',
-    strokeLinejoin: 'round',
-    'aria-hidden': true,
+  const IconSrc = iconMap[type]
+
+  if (IconSrc) {
+    return <img src={IconSrc} alt="" className="tech-icon-image" />
   }
 
-  switch (type) {
-    case 'react':
-      return (
-        <svg {...commonProps}>
-          <ellipse cx="32" cy="32" rx="18" ry="7" transform="rotate(0 32 32)" />
-          <ellipse cx="32" cy="32" rx="18" ry="7" transform="rotate(60 32 32)" />
-          <ellipse cx="32" cy="32" rx="18" ry="7" transform="rotate(120 32 32)" />
-          <circle cx="32" cy="32" r="4" fill="currentColor" stroke="none" />
-        </svg>
-      )
-    case 'vue':
-      return (
-        <svg {...commonProps}>
-          <path d="M13 18L32 48L51 18" fill="none" />
-          <path d="M21 18L32 38L43 18" fill="none" />
-        </svg>
-      )
-    case 'svelte':
-      return (
-        <svg {...commonProps}>
-          <path d="M17 18c7-6 24-6 30 3 4 5 4 12 0 17-5 6-17 8-23 3-5-4-5-11 0-16 6-5 15-4 20 0" />
-          <path d="M24 44c-4 3-10 4-16 2" />
-        </svg>
-      )
-    case 'next':
-      return (
-        <svg {...commonProps}>
-          <path d="M16 48V16L42 48H16Z" fill="none" />
-          <path d="M42 16H50V48" />
-        </svg>
-      )
-    case 'node':
-      return (
-        <svg {...commonProps}>
-          <path d="M32 10L48 20V44L32 54L16 44V20L32 10Z" />
-          <path d="M16 20L32 30L48 20" />
-          <path d="M32 30V54" />
-        </svg>
-      )
-    case 'postgres':
-      return (
-        <svg {...commonProps}>
-          <path d="M22 18h20c5 0 8 4 8 9v18c0 5-3 9-8 9H22c-5 0-8-4-8-9V27c0-5 3-9 8-9Z" />
-          <path d="M18 27h28" />
-          <path d="M24 18v28" />
-          <path d="M40 18v28" />
-          <path d="M24 32h16" />
-        </svg>
-      )
-    case 'redis':
-      return (
-        <svg {...commonProps}>
-          <path d="M18 22c0-4 6-8 14-8s14 4 14 8-6 8-14 8-14-4-14-8Z" />
-          <path d="M18 22v14c0 4 6 8 14 8s14-4 14-8V22" />
-          <path d="M18 28c0 4 6 8 14 8s14-4 14-8" />
-          <path d="M18 34c0 4 6 8 14 8s14-4 14-8" />
-        </svg>
-      )
-    case 'javascript':
-      return (
-        <svg {...commonProps}>
-          <rect x="12" y="12" width="40" height="40" rx="8" fill="currentColor" stroke="none" />
-          <text x="32" y="39" textAnchor="middle" fontSize="18" fontWeight="700" fill="#0f172a" fontFamily="Segoe UI, sans-serif">JS</text>
-        </svg>
-      )
-    case 'typescript':
-      return (
-        <svg {...commonProps}>
-          <rect x="12" y="12" width="40" height="40" rx="8" fill="currentColor" stroke="none" />
-          <text x="32" y="39" textAnchor="middle" fontSize="18" fontWeight="700" fill="#fff" fontFamily="Segoe UI, sans-serif">TS</text>
-        </svg>
-      )
-    case 'java':
-      return (
-        <svg {...commonProps}>
-          <path d="M17 25c0-7 7-12 15-12s15 5 15 12v8c0 7-7 14-15 14S17 40 17 33v-8Z" />
-          <path d="M22 41h22" />
-          <path d="M20 25h24" />
-          <path d="M46 25c0 4-3 7-6 7H26c-3 0-6-3-6-7" />
-          <path d="M50 27v9" />
-        </svg>
-      )
-    case 'tailwind':
-      return (
-        <svg {...commonProps}>
-          <path d="M19 18c5-5 11-7 18-7 7 0 12 3 14 8 2-4 6-6 12-6 5 0 9 2 11 7-4-2-8-2-11 0-3 2-6 7-8 12-4 8-8 12-15 12-7 0-10-5-11-12-1-6-4-10-10-14Z" fill="currentColor" stroke="none" opacity="0.18" />
-          <path d="M20 28c4-6 8-9 14-9 6 0 11 3 13 9-4 0-7 3-9 8-2 5-5 8-10 8-4 0-7-2-9-6-1-3-2-6-2-10Z" fill="currentColor" stroke="none" />
-        </svg>
-      )
-    case 'docker':
-      return (
-        <svg {...commonProps}>
-          <path d="M20 35h26v5H20zm2-10h5v7h-5zm7 0h5v7h-5zm7 0h5v7h-5zm7 0h5v7h-5z" />
-          <path d="M26 19c0-4 4-7 10-7s10 3 10 7v5H26v-5Z" />
-        </svg>
-      )
-    default:
-      return (
-        <svg {...commonProps}>
-          <circle cx="32" cy="32" r="20" />
-        </svg>
-      )
-  }
+  return (
+    <svg
+      viewBox="0 0 64 64"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      <circle cx="32" cy="32" r="20" />
+    </svg>
+  )
 }
 
 const technologies = technologiesData
